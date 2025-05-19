@@ -1,7 +1,26 @@
+#Laboratorio 5 Matematica Discreta
+#Integrantes:
+#- Estheban Heredia
+#- Adrian Arimany
+
 def criba():
     print("Has seleccionado la Criba")
+    n = int(input("Introduce un número entero positivo: "))
+    if n < 2:
+        print("El número debe ser mayor o igual a 2.")
+        return
+    lista=list(range(2, n+1))
+    primos = []
+    while len (lista) > 0:
+        p = lista[0]
+        primos.append(p)
 
+        for i in range(p, n+1, p):
+            if i in lista:
+                lista.remove(i)
+    print(f"Los números primos hasta {n} son: {primos}")
 
+    
 def prim_test():
     print("Deseas hacer un test de primalidad")
 
