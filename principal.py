@@ -1,7 +1,7 @@
 #Laboratorio 5 Matematica Discreta
 #Integrantes:
 #- Estheban Heredia
-#- Adrian Arimany
+#- Adrian Arimany 211063
 
 import math
 
@@ -48,12 +48,34 @@ def prim_test():
     
       
 
-def fermat_test():
-    print("Deseas hacer un test de primalidad de Fermat")
+def fermat_test(n, k):
+    print("Fermat PRimality Test, for n = ", n, " and k = ", k)
+    if n < 3:
+        raise ValueError("n must be greater than 2")
+    if n % 2 == 0:
+        print(f"{n} is composite.")
+        return
+    if n == 3:
+        print(f"{n} is prime.")
+        return
+    for a in range(2, min(n, k+1)):
+         if pow(a, n-1, n) != 1:
+            print(f"{n} is compossite (it failed with base {a}).")
+            return
+    print(f"{n} is probably prime (it passed {k} iterations).")
 
-def mod_exp():
-    print("Deseas hacer una exponenciación modular")
-
+def mod_exp(base, exponente, modulo):    
+    print("Modular Exponentiation for base = ", base, " exponent = ", exponente, " and modulo = ", modulo) 
+    if base < 2:
+        raise ValueError("base must be greater than 2")
+    if exponente < 0:
+        raise ValueError("exponent must be greater than 0")
+    if modulo <= 2 or modulo >= base:
+        raise ValueError("Modulo must be greater than 2 and less than base")
+    result = pow(base, exponente, modulo)
+    print(f"{result} is the result of {base}^{exponente} mod {modulo}")
+    
+    return result
 
 def mostrar_menu():
     print("\nMenú Principal:")
@@ -73,9 +95,20 @@ def main():
         elif opcion == '2':
             prim_test()
         elif opcion == '3':
-            fermat_test()
+            n = int(input("Write down an integer that you want to test if is prime or composite: "))
+            k = int(input("Write down the number of iterations you want to do on n: "))
+            try:
+                fermat_test(n,k)
+            except ValueError as e:
+                print(f"Error: {e}, please try again.")
         elif opcion == '4':
-            mod_exp()
+            b = int(input("Write down the base: "))
+            n = int(input("Write down the exponent: "))
+            m = int(input("Write down the modulo: "))
+            try:
+                mod_exp(b, n, m)
+            except ValueError as e:
+                print(f"Error: {e}, please try again.")
         elif opcion == '5':
             print("Saliendo del programa...")
             break
